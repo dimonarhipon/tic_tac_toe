@@ -29,22 +29,22 @@ const computeWinner = (cells) => {
   }
 }
 
-function App() {
+const useGameState = () => {
   const [currentValue, setCurrentValue] = useState(SYMBOL_X);
   const [ceils, setCeils] = useState(Array(CEIL_MAX).fill(null));
-  const [winnerSequene, setWinnerSequene] = useState(undefined);
+  const [winnerSequene, setWinnerSequene] = useState();
 
   const handleCeilsClick = (index) => {
     if (ceils[index] || winnerSequene) return;
 
     const copyCeils = ceils.slice();
     copyCeils[index] = currentValue;
-    setCeils(copyCeils);
 
     const winner = computeWinner(copyCeils);
+    setCeils(copyCeils);
+
     setCurrentValue(currentValue === SYMBOL_X ? SYMBOL_O : SYMBOL_X);
     setWinnerSequene(winner);
-    console.log(winnerSequene)
   }
 
   const handleResetClick = () => {
@@ -53,30 +53,86 @@ function App() {
     setCurrentValue(SYMBOL_X);
   }
 
+  const winnerSymbol = winnerSequene ? ceils[winnerSequene[0]] : undefined
   const isDraw = !winnerSequene && ceils.filter(value => value).length === CEIL_MAX;
 
+  return {
+    currentValue,
+    ceils,
+    winnerSequene,
+    handleCeilsClick,
+    handleResetClick,
+    winnerSymbol,
+    isDraw
+  }
+}
+
+function App() {
+  const {
+    currentValue,
+    ceils,
+    winnerSequene,
+    handleCeilsClick,
+    handleResetClick,
+    winnerSymbol,
+    isDraw
+  } = useGameState();
   return (
-    <div className="">
-      <div className="">
-        {isDraw ? 'Ничья' : winnerSequene ? `Победили ` : `Ход `}
-        {!isDraw && currentValue}
-      </div>
-      <div className='ceils'>{ceils.map((item, index) => {
-        const isWinner = winnerSequene?.includes(index);
+    <main className="main">
+      <GameInfo isDraw={isDraw} winnerSymbol={winnerSymbol} currentValue={currentValue} />
+      <div className='ceils'>{ceils.map((symbol, index) => {
         return (
-          <button
-            className={`ceil ${isWinner ? 'ceil--winner' : ''}`}
+          <GameCeil
             key={index}
+            isWinner={winnerSequene?.includes(index)} 
+            symbol={symbol}
             onClick={() => handleCeilsClick(index)}
-          >
-            <span>{item}</span>
-          </button>
+          />
         )
       })}
       </div>
       <button onClick={handleResetClick}>Начать сначала</button>    
-    </div>
+    </main>
   )
+}
+
+const GameInfo = (props) => {
+  const {isDraw, winnerSymbol, currentValue} = props;
+  console.log(props);
+  if (isDraw) {
+    return <div className="game-info">Ничья</div>
+  }
+
+  if (winnerSymbol) {
+    console.log(winnerSymbol)
+    return <div className="game-info">
+      Победитель: <GameSymbol symbol={winnerSymbol} />
+    </div>
+  }
+
+  return <div className="game-info">
+    Ход: <GameSymbol symbol={currentValue} />
+  </div>
+}
+
+const GameCeil = ({ isWinner, symbol, onClick }) => {
+  return (
+    <button
+      className={`ceil ${isWinner ? 'ceil--winner' : ''}`}
+      onClick={onClick}
+    >
+      {symbol && <GameSymbol symbol={symbol} />}
+    </button>
+  )
+}
+
+const GameSymbol = ({ symbol }) => {
+  const getSymbolClassName = (symbol) => {
+    if (symbol === SYMBOL_O) return 'symbol--o';
+    if (symbol === SYMBOL_X) return 'symbol--x';
+    return '';
+  }
+  return <span className={`symbol ${getSymbolClassName(symbol)}`}>{symbol}</span>
 }
 
 export default App
