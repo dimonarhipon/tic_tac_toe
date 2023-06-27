@@ -5,18 +5,19 @@
   text-align: center;
 }
 
+  
 .main {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-ul,
-ol {
+.ul,
+.ol {
   padding: 0;
   margin: 0;
 }
 
-.ceils {
+.cells {
   display: grid;
   grid-template-columns: repeat(3, 75px);
   grid-template-rows: repeat(3, 75px);
@@ -29,7 +30,7 @@ ol {
   border: 1px solid black;
 }
 
-.ceil {
+.cell {
   border: 2px solid rgb(85, 79, 79);
   margin: -2px 0 0 -2px;
   padding: 0;
@@ -42,14 +43,14 @@ ol {
   transition: 0.3s ease;
 }
 
-.ceil:hover,
-.ceil:focus {
+.cell:hover,
+.cell:focus {
   position: relative;
   border-color: #CD0074;
   transition: 0.3s ease;
   outline: none;
 }
-.ceil--winner {
+.cell--winner {
   background-color: #009B95;
 }
 
@@ -64,4 +65,13 @@ ol {
 
 .symbol--o {
   color: #A2EF00;
+}
+
+.reset {
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: transparent;
+  border: 1px solid gray;
+  padding: 4px 12px;
+  border-radius: 4px;
 }
