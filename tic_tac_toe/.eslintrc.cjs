@@ -13,3 +13,7 @@
 //     'react-refresh/only-export-components': 'warn',
 //   },
 // }
+{
+  ("extends");
+  ("next/core-web-vitals");
+}

@@ -5,11 +5,10 @@
   text-align: center;
 }
 
-  
 .main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .ul,
 .ol {
@@ -46,12 +45,12 @@
 .cell:hover,
 .cell:focus {
   position: relative;
-  border-color: #CD0074;
+  border-color: #cd0074;
   transition: 0.3s ease;
   outline: none;
 }
 .cell--winner {
-  background-color: #009B95;
+  background-color: #009b95;
 }
 
 .symbol {
@@ -60,11 +59,11 @@
 }
 
 .symbol--x {
-  color:#FD0006	;
+  color: #fd0006;
 }
 
 .symbol--o {
-  color: #A2EF00;
+  color: #a2ef00;
 }
 
 .reset {
