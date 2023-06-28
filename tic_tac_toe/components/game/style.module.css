@@ -7,10 +7,11 @@
 
   
 .main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+
 .ul,
 .ol {
   padding: 0;
@@ -69,7 +70,6 @@
 
 .reset {
   cursor: pointer;
-  margin-top: 10px;
   background-color: transparent;
   border: 1px solid gray;
   padding: 4px 12px;

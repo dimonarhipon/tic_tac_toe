@@ -15,7 +15,7 @@ export const Game = () => {
         isDraw
     } = useGameState();
     return (
-        <main className={styles['main']}>
+        <main className="h-screen flex flex-col gap-6 items-center justify-center">
         <GameInfo isDraw={isDraw} winnerSymbol={winnerSymbol} currentValue={currentValue} />
         <div className={styles['cells']}>{cells.map((symbol, index) => {
             return (
